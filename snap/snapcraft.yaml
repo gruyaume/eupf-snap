@@ -1,0 +1,53 @@
+name: eupf
+title: eUPF
+base: core22
+version: 'v0.6.4'
+summary: 5G User Plane Function (UPF) based on eBPF
+description: |
+  eUPF is the opensource User Plane Function (UPF) project for using inside or "outside" of any 3GPP 5G core.
+  The goal of the project is to provide high-observability and easily-deployed software for a various cases like multi-access edge computing (MEC) and local traffic breakout.
+  eUPF is built with eBPF to provide high observability and performance.
+  
+  The eUPF has been tested with three different 5G cores: Free5GC, Open5GS and OpenAirInterface. The OpenAirInterface gNB was also used during testing.
+license: Apache-2.0
+grade: devel
+confinement: devmode
+
+apps:
+  eupf:
+    daemon: simple
+    install-mode: disable
+    command: bin/eupf --config config/config.yaml
+
+parts:
+  swag:
+    plugin: go
+    source: https://github.com/swaggo/swag.git
+    source-type: git
+    source-tag: v1.8.12
+    build-snaps:
+      - go/1.21/stable
+  
+  eupf:
+    plugin: go
+    source: https://github.com/edgecomllc/eupf.git
+    source-type: git
+    source-tag: v0.6.4
+    after:
+      - swag
+    build-snaps:
+      - go/1.21/stable
+    build-packages:
+      - clang
+      - gcc-multilib
+      - libbpf-dev
+      - llvm
+    override-build: |
+      go generate -v ./cmd/...
+      craftctl default
+    organize:
+      bin/cmd: bin/eupf
+
+  config:
+    plugin: dump
+    source: config
