@@ -1,7 +1,6 @@
 name: Main branch workflow
 
 on:
-  push:
   pull_request:
     branches:
       - main

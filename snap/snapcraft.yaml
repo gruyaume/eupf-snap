@@ -10,14 +10,18 @@ description: |
   
   The eUPF has been tested with three different 5G cores: Free5GC, Open5GS and OpenAirInterface. The OpenAirInterface gNB was also used during testing.
 license: Apache-2.0
-grade: devel
-confinement: devmode
+grade: stable
+confinement: strict
 
 apps:
   eupf:
     daemon: simple
     install-mode: disable
     command: bin/eupf --config config/config.yaml
+    plugs:
+      - process-control
+      - network-control
+      - network-bind
 
 parts:
   swag:
