@@ -10,6 +10,7 @@ The snap for eUPF is the simplest way to get started with eUPF on Ubuntu.
 sudo snap install eupf
 sudo snap connect eupf:network-control
 sudo snap connect eupf:process-control
+sudo snap connect eupf:bpf
 sudo snap start eupf
 ```
 
