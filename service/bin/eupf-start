@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -ex
+
+"$SNAP"/bin/eupf --config "$SNAP_COMMON"/canard.yaml

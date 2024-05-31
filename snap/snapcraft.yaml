@@ -13,15 +13,24 @@ license: Apache-2.0
 grade: stable
 confinement: strict
 
+plugs:
+  bpf: 
+    interface: system-files
+    read:
+    - /sys/fs/bpf/upf_pipeline
+    write:
+    - /sys/fs/bpf/upf_pipeline
+
 apps:
   eupf:
     daemon: simple
     install-mode: disable
-    command: bin/eupf --config config/config.yaml
+    command: bin/eupf-start
     plugs:
       - process-control
       - network-control
       - network-bind
+      - bpf
 
 parts:
   swag:
@@ -52,6 +61,6 @@ parts:
     organize:
       bin/cmd: bin/eupf
 
-  config:
+  service-files:
     plugin: dump
-    source: config
+    source: service
