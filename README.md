@@ -10,14 +10,14 @@ The snap for eUPF is the simplest way to get started with eUPF on Ubuntu.
 sudo snap install eupf
 sudo snap connect eupf:network-control
 sudo snap connect eupf:process-control
-sudo snap connect eupf:bpf
-sudo snap start eupf
+sudo snap connect eupf:sys-fs-bpf-upf-pipeline
+sudo snap connect eupf:system-observe
 ```
 
-## Configuration
+Edit the configuration file at `/var/snap/eupf/common/config.yaml`
 
-Update the configuration file at `/var/snap/eupf/common/config.yaml` following the syntax outlined [here](https://github.com/edgecomllc/eupf/blob/main/docs/Configuration.md), then restart the service.
+Start the service:
 
-```bash
-sudo snap restart eupf
+```shell
+sudo snap start eupf
 ```
