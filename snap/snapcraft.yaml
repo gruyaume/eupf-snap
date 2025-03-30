@@ -1,7 +1,7 @@
 name: eupf
 title: eUPF
 base: core24
-version: 'v0.7.0'
+version: 'v0.6.4'
 summary: 5G User Plane Function (UPF) based on eBPF
 description: |
   eUPF is the opensource User Plane Function (UPF) project for using inside or "outside" of any 3GPP 5G core.
@@ -45,7 +45,7 @@ parts:
     plugin: go
     source: https://github.com/edgecomllc/eupf.git
     source-type: git
-    source-tag: v0.7.0
+    source-tag: v0.6.4
     after:
       - swag
     build-snaps:
