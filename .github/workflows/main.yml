@@ -11,15 +11,15 @@ on:
 jobs:
   build:
     name: Build snap
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-24.04
     outputs:
       snap: ${{ steps.snapcraft.outputs.snap }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build snap locally
-        uses: snapcore/action-build@v1.2.0
+      - name: Build snap
+        uses: snapcore/action-build@3bdaa03e1ba6bf59a65f84a751d943d549a54e79 #v1.3.0
         id: snapcraft
 
       - name: Upload locally built snap artifact
@@ -30,7 +30,7 @@ jobs:
 
   publish:
     name: Snap publish
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: build
     steps:
       - uses: actions/checkout@v4

@@ -1,6 +1,6 @@
 name: eupf
 title: eUPF
-base: core22
+base: core24
 version: 'v0.6.4'
 summary: 5G User Plane Function (UPF) based on eBPF
 description: |
@@ -14,10 +14,8 @@ grade: stable
 confinement: strict
 
 plugs:
-  bpf: 
+  sys-fs-bpf-upf-pipeline: 
     interface: system-files
-    read:
-    - /sys/fs/bpf/upf_pipeline
     write:
     - /sys/fs/bpf/upf_pipeline
 
@@ -27,10 +25,12 @@ apps:
     install-mode: disable
     command: bin/eupf-start
     plugs:
-      - process-control
-      - network-control
+      - sys-fs-bpf-upf-pipeline
+      - network
       - network-bind
-      - bpf
+      - network-control
+      - process-control
+      - system-observe
 
 parts:
   swag:
@@ -39,8 +39,8 @@ parts:
     source-type: git
     source-tag: v1.8.12
     build-snaps:
-      - go/1.21/stable
-  
+      - go/1.22/stable
+
   eupf:
     plugin: go
     source: https://github.com/edgecomllc/eupf.git
@@ -49,7 +49,7 @@ parts:
     after:
       - swag
     build-snaps:
-      - go/1.21/stable
+      - go/1.22/stable
     build-packages:
       - clang
       - gcc-multilib
