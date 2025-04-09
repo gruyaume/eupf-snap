@@ -2,7 +2,7 @@
 
 [eUPF](https://github.com/edgecomllc/eupf) is 5G User Plane Function (UPF) based on eBPF.
 
-The snap for eUPF is the simplest way to get started with eUPF on Ubuntu.
+The snap for eUPF is the simplest way to get operate eUPF on Linux systems.
 
 ## Usage
 
